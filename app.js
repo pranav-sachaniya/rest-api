@@ -6,7 +6,6 @@ It is responsible for parsing the incoming request bodies in a middleware before
 const bodyParser = require('body-parser');
 
 const route = require('./src/routes/routes');
-const stdroute = require('./src/routes/stdRoutes');
 const { urlencoded } = require('body-parser');
 
 const app = express(); //instance of express
@@ -17,7 +16,6 @@ app.use(bodyParser.json()); //it will receive json file
 
 // set base of route
 app.use('/', route); // this is middleware
-app.use('/', stdroute);
 
 // middleware start
 app.use((req, res, next) => {

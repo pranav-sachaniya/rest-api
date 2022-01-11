@@ -6,7 +6,7 @@ const auth = require('../controller/auth'); //import controller
 const router = express.Router(); // instance for route
 
 // routing using method
-router.get('/gets', auth.getRequest);
+router.get('/gets/:id', auth.getIdData);
 
 // routing using post method 
 router.post('/posts', auth.postRequest);
