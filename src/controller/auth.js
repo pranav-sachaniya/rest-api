@@ -72,10 +72,31 @@ const delRequest = ((req, res) => {
         .catch(err => {
           res.status(500).json({
             message: 'Error on deleting data',
-            err 
+            err
           }) // if caught error
         });
     });
 });
 
-module.exports = { getRequest, getIdData, postRequest, delRequest };
+// update request 
+const updateRequest = ((req, res) => {
+  User.findOneAndUpdate({ _id: req.params.id }, {
+    $set: {
+      name: req.body.name,
+      email: req.body.email
+    }
+  }) //it will take to update
+  .then(result => {
+    res.status(200).json({
+      message: 'Data updated successfully',
+      result
+    }) //if get data
+      .catch(err => {
+        message: 'Error occure while updaing data',
+          err
+      });
+  });
+});
+
+
+module.exports = { getRequest, getIdData, postRequest, delRequest, updateRequest };

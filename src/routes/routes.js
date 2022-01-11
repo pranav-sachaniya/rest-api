@@ -17,4 +17,7 @@ router.post('/posts', auth.postRequest);
 // routing for delete request
 router.delete('/del/:id', auth.delRequest);
 
+// routing for update request
+router.put('/update/:id', auth.updateRequest)
+
 module.exports = router; //export module
