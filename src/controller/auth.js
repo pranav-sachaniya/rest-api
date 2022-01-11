@@ -86,16 +86,16 @@ const updateRequest = ((req, res) => {
       email: req.body.email
     }
   }) //it will take to update
-  .then(result => {
-    res.status(200).json({
-      message: 'Data updated successfully',
-      result
-    }) //if get data
-      .catch(err => {
-        message: 'Error occure while updaing data',
-          err
-      });
-  });
+    .then(result => {
+      res.status(200).json({
+        message: 'Data updated successfully',
+        result
+      }) //if get data
+        .catch(err => {
+          message: 'Error occure while updaing data',
+            err
+        });
+    });
 });
 
 
