@@ -1,6 +1,7 @@
 const { Schema } = require('mongoose');
 const User = require('../models/userModels'); //import schema
 
+// get request
 const getRequest = ((req, res) => {
   /* res.status(200).json({
     message: 'This is get request'
@@ -60,4 +61,21 @@ const postRequest = ((req, res) => {
     });
 });
 
-module.exports = { getRequest, getIdData, postRequest };
+// delete request
+const delRequest = ((req, res) => {
+  User.remove({ _id: req.params.id }) // delete data from specific id
+    .then(result => {
+      res.status(200).json({
+        message: 'Data deleted successfully',
+        result
+      }) // if get data then 
+        .catch(err => {
+          res.status(500).json({
+            message: 'Error on deleting data',
+            err 
+          }) // if caught error
+        });
+    });
+});
+
+module.exports = { getRequest, getIdData, postRequest, delRequest };
