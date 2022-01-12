@@ -1,23 +1,24 @@
-// route work
-const express = require('express');
+import { Router } from 'express';
 
-const auth = require('../controller/auth'); //import controller
+import {
+	getRequest, getIdData, postRequest, delRequest, updateRequest,
+} from '../controller/auth'; // import controller
 
-const router = express.Router(); // instance for route
+const router = Router(); // instance for route
 
 // routing using method
-router.get('/gets', auth.getRequest);
+router.get('/gets', getRequest);
 
 // get data by id
-router.get('/gets/:id', auth.getIdData);
+router.get('/gets/:id', getIdData);
 
-// routing using post method 
-router.post('/posts', auth.postRequest);
+// routing using post method
+router.post('/posts', postRequest);
 
 // routing for delete request
-router.delete('/del/:id', auth.delRequest);
+router.delete('/del/:id', delRequest);
 
 // routing for update request
-router.put('/update/:id', auth.updateRequest)
+router.put('/update/:id', updateRequest);
 
-module.exports = router; //export module
+export default router; // export module

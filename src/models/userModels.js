@@ -1,15 +1,12 @@
 // create user schema
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const schema = mongoose.Schema; // schema created
-
-const userSchme = new schema({
-  // feild of schema
-  _id: mongoose.Schema.Types.ObjectId,
-  name: String,
-  email: String
+const { Schema, model } = mongoose
+const userSchema = new Schema({
+	// feild of schema
+	name: String,
+	email: String,
 });
 
 // convert schema into model
-const userModel = mongoose.model('User', userSchme);
-module.exports = userModel;
+export default model('User', userSchema);

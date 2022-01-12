@@ -1,20 +1,28 @@
 {
   "name": "rest-api",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "NODE_OPTIONS='--experimental-specifier-resolution=node' nodemon --exec babel-node app.js",
+    "build": "npm run clean && npm run build-babel",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "lint": "./node_module/.bin/eslint --ignore-path .gitignore . --fix"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "body-parser": "^1.19.1",
-    "express": "^4.17.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.1.5",
-    "nodemon": "^2.0.15"
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "nodemon": "^2.0.15",
+    "esm": "^3.2.25"
   },
   "repository": {
     "type": "git",
@@ -23,5 +31,11 @@
   "bugs": {
     "url": "https://github.com/pranav-mistry/rest-api/issues"
   },
-  "homepage": "https://github.com/pranav-mistry/rest-api#readme"
+  "homepage": "https://github.com/pranav-mistry/rest-api#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.5",
+    "body-parser": "^1.19.1"
+  }
 }

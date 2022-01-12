@@ -1,27 +1,24 @@
-const express = require('express');
-const mongoose = require('mongoose');
+/* eslint-disable no-undef */
+import express from 'express';
 
-/* Body-parser is the Node.js body parsing middleware. 
-It is responsible for parsing the incoming request bodies in a middleware before you handle it. */
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 
-const route = require('./src/routes/routes');
-const { urlencoded } = require('body-parser');
+import route from './src/routes/routes';
 
-const app = express(); //instance of express
+// eslint-disable-next-line no-unused-vars
+import db from './db';
+
+const app = express(); // instance of express
 
 // use of body-parser
-app.use(bodyParser.urlencoded({ extended : false }));
-app.use(bodyParser.json()); //it will receive json file
+const { json, urlencoded } = bodyParser;
+app.use(urlencoded({ extended: false }));
+app.use(json()); // it will receive json file
 
 // set base of route
 app.use('/', route); // this is middleware
 
-// middleware start
-app.use((req, res, next) => {
-  res.status(200).json({
-    message: "App is running now"
-  });
+// listenserver
+app.listen(3000, () => {
+	console.log('server running on port 3000');
 });
-
-module.exports = app; // export the module
