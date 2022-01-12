@@ -29,8 +29,10 @@ export const postRequest = async (req, res) => {
 			id: mongoose.Schema.Types.ObjectId,
 			name: req.body.name,
 			email: req.body.email,
+			password: req.body.password,
+			phone: req.body.phone,
 		});
-		user.save() // it will save the data
+		user.save(); // it will save the data
 		return resStatus(req,	res, { user });
 	} catch (err) {
 		return resError(req,	res, { err });
