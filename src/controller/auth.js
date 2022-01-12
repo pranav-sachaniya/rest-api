@@ -1,14 +1,14 @@
-import mongoose from 'mongoose';
+// import bcrypt from 'bcrypt';
 import User from '../models/userModels'; // import schema
 import { resError, resStatus } from '../utils/func';
 
 // get request 	now find the user data
-export const getRequest = async (req, res) => {
+export const fetchUserData = async (req, res) => {
 	try {
 		const user = await User.find();
-		return resStatus(req,	res, { user });
+		return resStatus(req, res, { user });
 	} catch (err) {
-		return resError(req,	res, { err });
+		return resError(req, res, { err });
 	}
 };
 
@@ -16,41 +16,45 @@ export const getRequest = async (req, res) => {
 export const getIdData = async (req, res) => {
 	try {
 		const user = await User.findById(req.params.id);
-		return resStatus(req,	res, { user });
+		return resStatus(req, res, { user });
 	} catch (err) {
-		return resError(req,	res, { err });
+		return resError(req, res, { err });
 	}
 };
 
 // post request
-export const postRequest = async (req, res) => {
+export const sendUserData = async (req, res) => {
 	try {
-		const user = await new User({
-			id: mongoose.Schema.Types.ObjectId,
-			name: req.body.name,
-			email: req.body.email,
-			password: req.body.password,
-			phone: req.body.phone,
+		const { username,	name, email, password, phone } = req.body; // destructuring of data
+
+		// const hash = await bcrypt.hash(password, 10);
+		const user = new User({
+			username,
+			name,
+			email,
+			password,
+			phone,
 		});
-		user.save(); // it will save the data
-		return resStatus(req,	res, { user });
+		await user.save(); // it will save the data
+		// console.log(user);
+		return resStatus(req, res, { user });
 	} catch (err) {
-		return resError(req,	res, { err });
+		return resError(req, res, { err: 'Proccess not done ...' });
 	}
 };
 
 // delete request
-export const delRequest = async (req, res) => {
+export const delUserData = async (req, res) => {
 	try {
 		const user = await User.remove({ _id: req.params.id }); // delete data from specific id
-		return resStatus(req,	res, { user });
+		return resStatus(req, res, { user });
 	} catch (err) {
-		return resError(req,	res, { err }); // if caught error
+		return resError(req, res, { err }); // if caught error
 	}
 };
 
 // update request
-export const updateRequest = async (req, res) => {
+export const updateUserData = async (req, res) => {
 	try {
 		const user = await User.findOneAndUpdate({ _id: req.params.id }, {
 			$set: {
@@ -58,8 +62,8 @@ export const updateRequest = async (req, res) => {
 				email: req.body.email,
 			},
 		}); // it will take to update
-		return resStatus(req,	res, { user });
+		return resStatus(req, res, { user });
 	} catch (err) {
-		return resError(req,	res, { err });
+		return resError(req, res, { err });
 	}
 };

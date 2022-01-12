@@ -11,4 +11,5 @@ export const resError = (req, res, data, code = 500) => res.send({
 	data,
 	code,
 	success: false,
+	// errorMessage: ,
 });

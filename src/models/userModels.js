@@ -1,9 +1,10 @@
 // create user schema
 import mongoose from 'mongoose';
 
-const { Schema, model } = mongoose;
+const { Schema, model } = mongoose
 const userSchema = new Schema({
 	// feild of schema
+	username: String,
 	name: String,
 	email: String,
 	password: String,

@@ -1,24 +1,24 @@
 import { Router } from 'express';
 
 import {
-	getRequest, getIdData, postRequest, delRequest, updateRequest,
+	fetchUserData, getIdData, sendUserData, delUserData, updateUserData,
 } from '../controller/auth'; // import controller
 
 const router = Router(); // instance for route
 
 // routing using method
-router.get('/gets', getRequest);
+router.get('/fetchUser', fetchUserData);
 
 // get data by id
-router.get('/gets/:id', getIdData);
+router.get('/fetchUser/:id', getIdData);
 
 // routing using post method
-router.post('/posts', postRequest);
+router.post('/sendUser', sendUserData);
 
 // routing for delete request
-router.delete('/del/:id', delRequest);
+router.delete('/delUser/:id', delUserData);
 
 // routing for update request
-router.put('/update/:id', updateRequest);
+router.put('/updateUser/:id', updateUserData);
 
 export default router; // export module
