@@ -1,20 +1,14 @@
-/* eslint-disable brace-style */
-/* eslint-disable no-empty */
-/* eslint-disable array-callback-return */
 import mongoose from 'mongoose';
 import User from '../models/userModels'; // import schema
+import { resError, resStatus } from '../utils/func';
 
 // get request 	now find the user data
 export const getRequest = async (req, res) => {
 	try {
-		// console.log(User);
 		const user = await User.find();
-		res.status(200).json({ user }); // json
+		return resStatus(req,	res, { user });
 	} catch (err) {
-		console.log(err);
-		res.status(500).json({
-			err,
-		}); // catch
+		return resError(req,	res, { err });
 	}
 };
 
@@ -22,13 +16,9 @@ export const getRequest = async (req, res) => {
 export const getIdData = async (req, res) => {
 	try {
 		const user = await User.findById(req.params.id);
-		res.status(200).json({
-			user,
-		});
+		return resStatus(req,	res, { user });
 	} catch (err) {
-		res.status(500).json({
-			error: err,
-		});
+		return resError(req,	res, { err });
 	}
 };
 
@@ -41,16 +31,9 @@ export const postRequest = async (req, res) => {
 			email: req.body.email,
 		});
 		user.save() // it will save the data
-			.then((result) => {
-				console.log(result);
-				res.status(200).json({
-					newUser: user,
-				});
-			});
-	} catch (err) { // if get an error
-		res.status(500).json({
-			error: err,
-		});
+		return resStatus(req,	res, { user });
+	} catch (err) {
+		return resError(req,	res, { err });
 	}
 };
 
@@ -58,15 +41,9 @@ export const postRequest = async (req, res) => {
 export const delRequest = async (req, res) => {
 	try {
 		const user = await User.remove({ _id: req.params.id }); // delete data from specific id
-		res.status(200).json({
-			message: 'Data deleted successfully',
-			user,
-		}); // if get data then
+		return resStatus(req,	res, { user });
 	} catch (err) {
-		res.status(500).json({
-			message: 'Error on deleting data',
-			err,
-		}); // if caught error
+		return resError(req,	res, { err }); // if caught error
 	}
 };
 
@@ -79,15 +56,8 @@ export const updateRequest = async (req, res) => {
 				email: req.body.email,
 			},
 		}); // it will take to update
-		res.status(200).json({
-			message: 'Data updated successfully',
-			user,
-		});
-	} // try close
-	catch (err) {
-		res.status(500).json({
-			message: 'Error occure during updation',
-			err,
-		});
+		return resStatus(req,	res, { user });
+	} catch (err) {
+		return resError(req,	res, { err });
 	}
 };
