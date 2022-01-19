@@ -55,39 +55,6 @@ export const getIdData = async (req, res) => {
 	}
 };
 
-// post request
-export const sendUserData = async (req, res) => {
-	try {
-		const {
-			username, name, email, password, phone,
-		} = req.body; // destructuring of data
-		// check try and catch method for new configuration
-		let hash;
-		try {
-			hash = await bcrypt.hash(password, 10);
-		} catch (err) {
-			return resError(req, res, { err: 'There is a hashing in method' });
-		} // hashing try catch
-
-		const user = new User({
-			username,
-			name,
-			email,
-			password: hash,
-			phone,
-		});
-
-		try {
-			await user.save(); // it will save the data
-			return resStatus(req, res, { user });
-		} catch (err) {
-			return resError(req, res, { err: 'Data is not inserted' });
-		} // user try catch
-	} catch (err) {
-		return resError(req, res, { err: 'Proccess not done ...' });
-	}
-};
-
 // delete request
 export const delUserData = async (req, res) => {
 	try {
@@ -112,3 +79,5 @@ export const updateUserData = async (req, res) => {
 		return resError(req, res, { err });
 	}
 };
+
+// collection to the main function
