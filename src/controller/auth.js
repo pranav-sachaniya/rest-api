@@ -10,7 +10,9 @@ export const fetchUserData = async (req, res) => {
 	} catch (err) {
 		return resError(req, res, { err });
 	}
-};// post request
+};
+
+// post request
 export const sendUserData = async (req, res) => {
 	try {
 		const {
