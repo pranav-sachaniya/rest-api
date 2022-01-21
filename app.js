@@ -3,7 +3,6 @@ import express from 'express';
 
 import chalk from 'chalk';
 
-
 import bodyParser from 'body-parser';
 
 import route from './src/routes/routes';
