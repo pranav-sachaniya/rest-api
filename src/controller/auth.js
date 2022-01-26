@@ -79,5 +79,3 @@ export const updateUserData = async (req, res) => {
 		return resError(req, res, { err });
 	}
 };
-
-// collection to the main function
